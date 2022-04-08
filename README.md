@@ -1,4 +1,4 @@
-# Creating a windows 11 with IaC
+# Creating a windows vm using IaC
 
 This repo will introduce how to provision a windows 11 vm using same tools we
 are used to work with linux vms. This example will guide us on how to work with:

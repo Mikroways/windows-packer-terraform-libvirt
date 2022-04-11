@@ -102,6 +102,8 @@ machine using terraform. The [`terraform/`](./terraform) folder will create a
 new base template image, and then create a windows virtual machine from this
 template. Follow this folder documentation.
 
+Once a machine is created, we will proceed to provision it with ansible.
+
 ## Ansible
 
 TODO

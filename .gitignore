@@ -1,1 +1,3 @@
 packer/
+.terraform
+terraform.tfstate*

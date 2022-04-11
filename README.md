@@ -10,6 +10,9 @@ are used to work with linux vms. This example will guide us on how to work with:
 To completely install all requirements [follow these detailed
 instructions](docs/requirements.md)
 
+It's important to have above 30GB of free space, windows templates are really
+big and every process considered requires lot's of space.
+
 ## Create packer templates
 
 To create a windows packer template, we are going to use [github
@@ -22,6 +25,8 @@ The following commands will prepare a template for windows 11:
 git clone https://github.com/rgl/windows-vagrant packer/
 cd packer
 ```
+> Note that cloning this repo into `packer/` sub folder into this repo will be
+> ignored.
 
 When inside packer directory, you can follow repository documentation, but if
 you are anxious to start virtualising keep going:
@@ -36,10 +41,14 @@ to use libvirt, so:
 ```
 make --dry-run build-windows-11-21h2-libvirt
 ```
+> If everything looks good to yo, proceed without `--dry-run`
 
-Will list all commands that will be run. If you would like to change, for
-example some variable of each packer hcl file, you are going to need to run this
-comman manually. But you can do something like:
+
+### In case you want to change some packer options
+
+If you would like to change, for example some variables of each packer hcl file,
+you are going to need to run some helper script. The next example shows how
+create this helper script, adding an extra `-var-file` option:
 
 ```
 make --dry-run build-windows-11-21h2-libvirt \
@@ -48,8 +57,8 @@ make --dry-run build-windows-11-21h2-libvirt \
 chmod +x my-packer-helper.sh
 ```
 
-And add some options as you prefer. For example, you can pass new variable
-values, for example to change windows language to spanish:
+For example, you can pass new variable values, to change windows language to
+spanish:
 
 ```
 cat > windows-11-customizations.hcl <<EOF
@@ -63,10 +72,27 @@ Then run your `./my-packer-helper.sh`
 > This will not work with provided unattended file, so check this file if trying
 > to change installation language.
 
+### Creating a Vagrant Box or not
+
+Packer repository will create a vagrant box and erase intermediate artifacts,
+this is a qcow2 windows template ready to be used by terraform. If you are only
+working with terraform, it may be useful not to wait for a Vagrant box creation,
+so this step can be avoided removing the post-processor section inside
+`windows-11-21h2.pkr.hcl`.
+
+If you prefer to keep a Vagrant box image and opt to use both, you can edit
+section and set `keep_input_artifact` to true.
+
+The last option, is to extract qcow2 image from Vagrant box:
+
+```
+tar xfz windows-11-21h2-amd64-libvirt.box box.img
+```
+
 ### During packer is working
 
 If you see packer logs, you will notice there is a vnc URL like
-`qemu.windows-11-21h2-amd64: vnc://127.0.0.1:5948`. This means that you can
+`qemu.windows-11-21h2-amd64: vnc://127.0.0.1:59XX`. This means that you can
 attach through vnc, and check installation process is working.
 
 ## Terraform
@@ -74,9 +100,7 @@ attach through vnc, and check installation process is working.
 Once a libvirt template is created using packer, we are going to create a new
 machine using terraform. The [`terraform/`](./terraform) folder will create a
 new base template image, and then create a windows virtual machine from this
-template.
-
-TODO
+template. Follow this folder documentation.
 
 ## Ansible
 

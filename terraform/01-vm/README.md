@@ -47,7 +47,7 @@ terraform apply
 | <a name="input_pool"></a> [pool](#input\_pool) | Libvirt storage pool where volumes will be created | `string` | `"default"` | no |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | Prefix to use for every libvirt resource created by terraform | `string` | `"windows-11"` | no |
 | <a name="input_provider_url"></a> [provider\_url](#input\_provider\_url) | Libvirt URL to use | `string` | `"qemu:///system"` | no |
-| <a name="input_timezone"></a> [timezone](#input\_timezone) | Timezone | `string` | `"America/Argentina/Buenos_Aires"` | no |
+| <a name="input_timezone"></a> [timezone](#input\_timezone) | Timezone | `string` | `"Argentina Standard Time"` | no |
 | <a name="input_winrm_password"></a> [winrm\_password](#input\_winrm\_password) | Password of winrm\_username. Please change default value | `string` | `"M1kr0w4ys"` | no |
 | <a name="input_winrm_username"></a> [winrm\_username](#input\_winrm\_username) | Username to be created as admin | `string` | `"mikroways"` | no |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

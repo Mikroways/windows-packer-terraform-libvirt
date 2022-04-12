@@ -39,7 +39,6 @@ data "template_cloudinit_config" "cloudinit" {
     content      = <<-EOF
       #cloud-config
       hostname: ${var.prefix}
-      timezone: ${var.timezone}
       users:
         - name: ${jsonencode(var.winrm_username)}
           passwd: ${jsonencode(var.winrm_password)}
@@ -88,6 +87,7 @@ data "template_cloudinit_config" "cloudinit" {
       cmd /c ver | Out-String
       Write-Title "Environment Variables"
       dir env:
+      Set-Timezone "${var.timezone}"
       Write-Title "TimeZone"
       Get-TimeZone
       EOF

@@ -39,7 +39,7 @@ variable "winrm_password" {
 }
 
 variable "timezone" {
-  default     = "America/Argentina/Buenos_Aires"
+  default     = "Argentina Standard Time"
   description = "Timezone"
 }
 

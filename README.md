@@ -102,8 +102,17 @@ machine using terraform. The [`terraform/`](./terraform) folder will create a
 new base template image, and then create a windows virtual machine from this
 template. Follow this folder documentation.
 
-Once a machine is created, we will proceed to provision it with ansible.
+Once a machine is created, we will proceed to provision it with ansible. If you
+follow each of the recomended requirements, you could do:
+
+```
+ssh -l mikroways windows-11
+```
+
+And hopefuly get into your windows machine
 
 ## Ansible
 
-TODO
+To 
+
+

@@ -5,21 +5,19 @@ on:
   pull_request:
 
 jobs:
-  terraform:
+  linters:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/antonbabenko/pre-commit-terraform:latest
-
     steps:
-    - uses: actions/checkout@v2
-      name: Checkout source code
-    - name: Terraform ckecks
-      run: pre-commit run -a
-
-        #    - name: Run tf tests
-        #      uses: addnab/docker-run-action@v3
-        #      with:
-        #          image: ghcr.io/antonbabenko/pre-commit-terraform:latest
-        #          options: -v ${{ github.workspace }}:/lint
-        #          run: |
-        #            run -a
+      - uses: actions/checkout@v2
+        name: Checkout source code
+      - name: Terraform checks
+        run: |
+          pre-commit run -a terraform_tflint
+          pre-commit run -a terraform_fmt
+          pre-commit run -a terraform_docs
+      - name: Run ansible-lint
+        uses: ansible-community/ansible-lint-action@main
+        with:
+          path: "ansible/"

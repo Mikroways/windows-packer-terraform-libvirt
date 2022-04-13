@@ -1,0 +1,4 @@
+pywinrm>=0.3.0
+ansible~=4.9.0
+jmespath~=0.10.0
+ansible-lint~=5.3.1

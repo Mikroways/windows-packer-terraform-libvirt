@@ -1,0 +1,88 @@
+---
+- name: Customize windows machines
+  hosts: all
+  become: false
+  gather_facts: false
+  vars:
+    install_packages: true
+    choco_installed_packages:
+      - googlechrome
+      - 7zip
+      - Firefox
+      - git
+      - kubernetes-cli
+      - python3
+      - terraform
+      - vscode
+    install_windows_updates: true
+    update_categories:
+      # You can install only specific updates by uncommenting it
+      # * - installs all updates
+      # - "*"
+      - Critical Updates
+      # - Definition Updates
+      # - Developer Kits
+      # - Feature Packs
+      # - Security Updates
+      # - Service Packs
+      # - Tools
+      # - Update Rollups
+      # - Updates
+      # - Upgrades
+    install_wsl2: true
+    wsl2_distribution: wsl-ubuntu-2004
+    remove_bloatware: true
+    bloatware:
+      - Microsoft.BingNews
+      - Microsoft.BingWeather
+      - Microsoft.GamingApp
+      - Microsoft.GetHelp
+      - Microsoft.Getstarted
+      # - Microsoft.Messaging
+      - Microsoft.Microsoft3DViewer
+      - Microsoft.MicrosoftOfficeHub
+      - Microsoft.MicrosoftSolitaireCollection
+      - Microsoft.MicrosoftStickyNotes
+      - Microsoft.MixedReality.Portal
+      # - Microsoft.MSPaint
+      - Microsoft.Office.OneNote
+      - Microsoft.OneConnect
+      - Microsoft.People
+      - Microsoft.PowerAutomateDesktop
+      - Microsoft.Print3D
+      - Microsoft.ScreenSketch
+      - Microsoft.SkypeApp
+      - Microsoft.Todos
+      - Microsoft.Windows.Photos
+      - Microsoft.WindowsAlarms
+      # - Microsoft.WindowsCalculator
+      - Microsoft.Wallet
+      - Microsoft.WindowsCamera
+      # - microsoft.windowscommunicationsapps
+      - Microsoft.WindowsFeedbackHub
+      - Microsoft.WindowsMaps
+      - Microsoft.WindowsSoundRecorder
+      - Microsoft.Xbox
+      - Microsoft.Xbox.TCUI
+      - Microsoft.XboxApp
+      - Microsoft.XboxGameOverlay
+      - Microsoft.XboxSpeechToTextOverlay
+      # - Microsoft.YourPhone
+      - Microsoft.ZuneMusic
+      - Microsoft.ZuneVideo
+      - MicrosoftTeams
+  tasks:
+    - import_tasks: tasks/updates.yml
+      when: install_windows_updates
+      tags: ["updates"]
+
+    - import_tasks: tasks/debloat.yml
+      when: remove_bloatware
+      tags: ["debloat"]
+
+    - import_tasks: tasks/choco.yml
+      tags: ["choco"]
+
+    - import_tasks: tasks/wsl2.yml
+      when: install_wsl2
+      tags: ["wsl"]

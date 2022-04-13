@@ -1,0 +1,8 @@
+---
+all:
+  hosts:
+    windows-11:
+      ansible_connection: winrm
+      ansible_user: mikroways
+      ansible_password: M1kr0w4ys
+      ansible_winrm_server_cert_validation: ignore

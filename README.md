@@ -113,6 +113,22 @@ And hopefuly get into your windows machine
 
 ## Ansible
 
-To 
+Ansible needs to be installed. We provide a `.envrc` so, if you are using
+[direnv](https://direnv.net/) simply run `direnv allow`. Otherwise, it's
+recommended to create a new virtualenv.
+
+Then install requirements:
+
+```
+pip install -U pip
+pip install -r requirements.txt
+ansible-galaxy install -r requirements.yml
+```
+
+> Note: when using direnv with pyenv, its needed to get out of current
+> directory, and the enter again so ansible-modules are reloaded
+
+To get a full description of ansible playbook, please read
+[`ansible/`](./ansible) documentation.
 
 

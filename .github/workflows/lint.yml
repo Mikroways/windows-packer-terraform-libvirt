@@ -8,7 +8,7 @@ jobs:
   linters:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/antonbabenko/pre-commit-terraform:latest
+      image: ghcr.io/antonbabenko/pre-commit-terraform:v1.64.1
     steps:
       - uses: actions/checkout@v2
         name: Checkout source code

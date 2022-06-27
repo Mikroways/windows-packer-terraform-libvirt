@@ -14,6 +14,7 @@
       - python3
       - terraform
       - vscode
+      - vlc
     install_windows_updates: true
     update_categories:
       # You can install only specific updates by uncommenting it
@@ -31,6 +32,7 @@
       # - Upgrades
     install_wsl2: true
     wsl2_distribution: wsl-ubuntu-2004
+    wsl2_distribution_params: "/InstallRoot:true"
     remove_bloatware: true
     bloatware:
       - Microsoft.BingNews

@@ -21,4 +21,5 @@
   win_chocolatey:
     name: "{{ wsl2_distribution }}"
     ignore_checksums: true
+    package_params: "{{ wsl2_distribution_params }}"
     state: present
